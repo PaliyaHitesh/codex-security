@@ -21,15 +21,25 @@ CLI remains the single source of truth for all of it.
 
 ## Install in Claude Code
 
-For local development, install directly from this checkout:
+`claude plugin install` only installs from a configured marketplace, not from
+a bare filesystem path — so for local development, register this checkout as
+a marketplace first, then install from it:
 
 ```bash
-claude plugin install ./integrations/claude-code
+claude plugin marketplace add ./integrations/claude-code
+claude plugin install codex-security@codex-security
 ```
 
-Once this plugin is published to a marketplace, it can instead be added by
-marketplace name. Installed skills are available as `/codex-security:<skill-name>`,
-e.g. `/codex-security:security-scan`.
+The first command reads `integrations/claude-code/.claude-plugin/marketplace.json`
+(a self-contained, single-plugin marketplace pointing at `.`) and registers it
+under the name `codex-security`. The second installs the `codex-security`
+plugin from it. Once this plugin is published to a public marketplace, it can
+instead be added by that marketplace's name.
+
+Verify with `claude plugin list` (expect `codex-security@codex-security`,
+scope `user`) or `claude plugin details codex-security@codex-security` (expect
+all 15 skills listed under "Component inventory"). Installed skills are
+available as `/codex-security:<skill-name>`, e.g. `/codex-security:security-scan`.
 
 ## Install in opencode
 
@@ -107,8 +117,9 @@ one approval gate per `track-findings` run; never claim a hardening proposal
 This tree is pure Markdown/JSON with no compiled code or test harness. Run
 this checklist at creation and again after any skill-content change:
 
-1. `claude plugin install ./integrations/claude-code`; confirm all 15 skills
-   appear under `/codex-security:*`.
+1. `claude plugin marketplace add ./integrations/claude-code && claude plugin
+   install codex-security@codex-security`; confirm all 15 skills appear under
+   `/codex-security:*` (or via `claude plugin details codex-security@codex-security`).
 2. `npx @openai/codex-security info --json` — confirms the environment can run
    the CLI before testing any skill.
 3. Against a small, disposable fixture repo with one obvious, synthetic

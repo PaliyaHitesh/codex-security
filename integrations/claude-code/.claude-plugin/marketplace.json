@@ -1,0 +1,14 @@
+{
+  "name": "codex-security",
+  "description": "Local marketplace for the Codex Security Claude Code plugin (dev install from this checkout).",
+  "owner": {
+    "name": "OpenAI"
+  },
+  "plugins": [
+    {
+      "name": "codex-security",
+      "description": "Security scanning, validation, patching, triage, and reporting skills that shell out to the @openai/codex-security CLI.",
+      "source": "."
+    }
+  ]
+}
