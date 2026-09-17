@@ -1,0 +1,20 @@
+{
+  "name": "codex-security",
+  "displayName": "Codex Security",
+  "description": "Security scanning, validation, patching, triage, and reporting skills that shell out to the @openai/codex-security CLI.",
+  "version": "0.1.0",
+  "author": {
+    "name": "OpenAI"
+  },
+  "homepage": "https://developers.openai.com/codex/security",
+  "repository": "https://github.com/openai/codex-security",
+  "license": "Apache-2.0",
+  "keywords": [
+    "security",
+    "code-review",
+    "diff-review",
+    "appsec",
+    "threat-modeling"
+  ],
+  "skills": "./skills/"
+}
